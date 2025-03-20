@@ -1,8 +1,14 @@
-import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
+import { useState } from 'react'
+import MemoryInfo from './components/MemoryInfo'
 
 function App(): JSX.Element {
+  const [isShowMemoryInfo, setIsShowMemoryInfo] = useState(false)
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
+
+  const handleMemoryInfoButton = (): void => {
+    setIsShowMemoryInfo((p) => !p)
+  }
 
   return (
     <>
@@ -27,7 +33,10 @@ function App(): JSX.Element {
           </a>
         </div>
       </div>
-      <Versions></Versions>
+      <button className="action" onClick={handleMemoryInfoButton}>
+        Open Memory info
+      </button>
+      {isShowMemoryInfo && <MemoryInfo />}
     </>
   )
 }

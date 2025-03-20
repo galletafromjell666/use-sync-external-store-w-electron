@@ -1,8 +1,17 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
-// Custom APIs for renderer
-const api = {}
+export const api = {
+  onMemoryUsageUpdate: (callback) => {
+    ipcRenderer.on('memory-usage', (_event, data) => callback(data))
+
+    // Return a cleanup function
+    return (): void => {
+      console.log("removing listener from ipcRenderer 'memory-usage'")
+      ipcRenderer.removeAllListeners('memory-usage')
+    }
+  }
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
