@@ -8,7 +8,7 @@ export const api = {
     // Return a cleanup function
     return (): void => {
       console.log("[preload] Removing listener from ipcRenderer 'memory-usage'")
-      ipcRenderer.removeListener('memory-usage', callback)
+      ipcRenderer.removeAllListeners('memory-usage')
     }
   }
 }

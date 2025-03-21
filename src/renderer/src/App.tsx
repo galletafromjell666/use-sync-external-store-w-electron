@@ -23,7 +23,7 @@ function App(): JSX.Element {
       </p>
       <div className="actions">
         <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
+          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer noopener">
             Documentation
           </a>
         </div>

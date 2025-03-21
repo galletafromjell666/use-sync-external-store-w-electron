@@ -7,12 +7,10 @@ export interface SystemMemoryInfo {
   swapFree: number
 }
 
-let hasAddedListener = false
-
 const memoryStore = {
   data: {} as SystemMemoryInfo,
   listeners: new Set<() => void>(),
-  removeListener: (): void => {},
+  removeIpcListener: (): void => {},
 
   getSnapshot(): SystemMemoryInfo {
     // something like a selector
@@ -21,15 +19,9 @@ const memoryStore = {
   subscribe(listener: () => void): () => void {
     console.log('[useSystemMemory] Adding new subscriber')
     memoryStore.listeners.add(listener)
-    hasAddedListener = true
+
     return () => {
       memoryStore.listeners.delete(listener)
-      if (memoryStore.listeners.size === 0 && hasAddedListener) {
-        console.log(
-          '[useSystemMemory] No more subscribers, removing listener from "window.api.onMemoryUsageUpdate"'
-        )
-        memoryStore.removeListener?.()
-      }
     }
   },
   update(data: SystemMemoryInfo): void {
@@ -41,7 +33,12 @@ const memoryStore = {
 console.log(
   '[useSystemMemory] Initializing top-level subscription to "window.api.onMemoryUsageUpdate"'
 )
-memoryStore.removeListener = window.api.onMemoryUsageUpdate((value) => {
+
+window.addEventListener('beforeunload', () => {
+  memoryStore.removeIpcListener()
+})
+
+memoryStore.removeIpcListener = window.api.onMemoryUsageUpdate((value) => {
   console.log('[useSystemMemory] Received new value from main:', value)
   memoryStore.update(value)
 })
