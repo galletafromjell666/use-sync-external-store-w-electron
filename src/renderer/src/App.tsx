@@ -32,10 +32,13 @@ function App(): JSX.Element {
             Send IPC
           </a>
         </div>
+        <div className="action">
+          <a target="_blank" rel="noreferrer" onClick={handleMemoryInfoButton}>
+            Open Memory Info
+          </a>
+        </div>
       </div>
-      <button className="action" onClick={handleMemoryInfoButton}>
-        Open Memory info
-      </button>
+
       {isShowMemoryInfo && <MemoryInfo />}
     </>
   )
