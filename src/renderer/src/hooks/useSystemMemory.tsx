@@ -35,17 +35,17 @@ const memoryStore = {
 }
 
 console.log(
-  '[useSystemMemory] Initializing top-level subscription to "window.api.onMemoryUsageUpdate"'
+  '[useSystemMemory] Initializing top-level subscription to "window.api.onMemorySystemInfoUpdate"'
 )
 
-memoryStore.removeIpcListener = window.api.onMemoryUsageUpdate((value) => {
+memoryStore.removeIpcListener = window.api.onMemorySystemInfoUpdate((value) => {
   console.log('[useSystemMemory] Received new value from main:', value)
   memoryStore.update(value)
 })
 
-window.onbeforeunload = (): void => {
+window.addEventListener('beforeunload', (): void => {
   memoryStore.removeIpcListener()
-}
+})
 
 function useSystemMemory(): SystemMemoryInfo {
   return useSyncExternalStore(memoryStore.subscribe, memoryStore.getSnapshot)

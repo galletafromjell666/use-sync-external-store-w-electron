@@ -2,7 +2,7 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 export const api = {
-  onMemoryUsageUpdate: (callback) => {
+  onMemorySystemInfoUpdate: (callback) => {
     ipcRenderer.on('memory-usage', (_event, data) => callback(data))
 
     // Return a cleanup function
