@@ -1,4 +1,4 @@
-# electron-sync-external-store
+# use-sync-external-store-w-electron
 
 An Electron application with React and TypeScript
 

@@ -1,12 +1,12 @@
 import useSystemMemory from '@renderer/hooks/useSystemMemory'
 
 function MemoryInfo(): JSX.Element {
-  const x = useSystemMemory()
-  console.log('[MemoryInfoComponent]', x)
+  const systemMemoryInfo = useSystemMemory()
+  console.log('[MemoryInfoComponent]', systemMemoryInfo)
   return (
     <div>
       <h1>MemoryInfo</h1>
-      <pre>{JSON.stringify(x)}</pre>
+      <pre>{JSON.stringify(systemMemoryInfo)}</pre>
     </div>
   )
 }

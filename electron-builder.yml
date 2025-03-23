@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: electron-sync-external-store
+productName: use-sync-external-store-w-electron
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: electron-sync-external-store
+  executableName: use-sync-external-store-w-electron
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
