@@ -39,7 +39,8 @@ function App(): JSX.Element {
         </div>
       </div>
 
-      {isShowMemoryInfo && <MemoryInfo />}
+      {isShowMemoryInfo && <MemoryInfo key={1} />}
+      {isShowMemoryInfo && <MemoryInfo key={2} />}
     </>
   )
 }
